@@ -1,0 +1,30 @@
+.header {
+  text-align: center;
+}
+
+.titel {
+  margin-bottom: 5px;
+}
+
+.button {
+  width: 60px;
+  height: 25px;
+  margin-bottom: 5px;
+  background-color: aqua;
+  border: none;
+  border-radius: 10px;
+  transition: all 250ms linear;
+}
+.button__new-game {
+  width: 90px;
+}
+
+.button:hover,
+.button:focus {
+  background-color: palevioletred;
+}
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
