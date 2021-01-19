@@ -27,4 +27,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
+}
+.joystick {
+  display: none;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .joystick {
+    display: block;
+    margin: 0 auto;
+    opacity: 0.3;
+  }
 }

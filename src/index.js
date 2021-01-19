@@ -1,18 +1,19 @@
 const canvas = document.querySelector('#canvas');
 const buttonStart = document.querySelector('.button__start');
 const buttonNewGame = document.querySelector('.button__new-game');
+const joystick = document.querySelector('#joystick');
 
 const mediaOptions = window.matchMedia('all and (max-width: 320px)');
 
 if (mediaOptions.matches) {
-  canvas.width = 200;
+  canvas.width = 300;
   canvas.height = 200;
 }
 
 const ctx = canvas.getContext('2d');
 const width = canvas.width;
 const height = canvas.height;
-// getBoundingClientRect();
+
 const blockSize = 10;
 const widthInBlock = width / blockSize;
 const heigthInBlock = height / blockSize;
@@ -198,18 +199,31 @@ function startGame() {
   }, 100);
 }
 
-window.addEventListener('keydown', listenEvent);
-
-function listenEvent(event) {
+// Реализация управления с клавиатуры
+const listenEvent = function (event) {
   event.preventDefault();
+  isCorrectDirection(event.key);
+};
+
+// реализация джостика для телефона
+const listetJoystick = function (event) {
+  isCorrectDirection(event.target.id);
+};
+
+const isCorrectDirection = function (currentDirection) {
   const directions = {
     ArrowRight: 'right',
     ArrowUp: 'up',
     ArrowDown: 'down',
     ArrowLeft: 'left',
   };
-  const newDirection = directions[event.key];
+
+  const newDirection = directions[currentDirection];
   if (newDirection !== undefined) {
     snake.setDirection(newDirection);
   }
-}
+};
+
+window.addEventListener('keydown', listenEvent);
+
+joystick.addEventListener('click', listetJoystick);
