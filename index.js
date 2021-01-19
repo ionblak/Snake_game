@@ -3,11 +3,11 @@ const buttonStart = document.querySelector('.button__start');
 const buttonNewGame = document.querySelector('.button__new-game');
 const joystick = document.querySelector('#joystick');
 
-const mediaOptions = window.matchMedia('all and (max-width: 320px)');
+const mediaOptions = window.matchMedia('all and (max-width: 400px)');
 
 if (mediaOptions.matches) {
-  canvas.width = 200;
-  canvas.height = 200;
+  canvas.width = 340;
+  canvas.height = 340;
 }
 
 const ctx = canvas.getContext('2d');
@@ -196,7 +196,7 @@ function startGame() {
     snake.draw();
     apple.draw();
     drawBorder();
-  }, 100);
+  }, 200);
 }
 
 // Реализация управления с клавиатуры
@@ -207,7 +207,9 @@ const listenEvent = function (event) {
 
 // реализация джостика для телефона
 const listetJoystick = function (event) {
-  isCorrectDirection(event.target.id);
+  const button = event.target;
+
+  isCorrectDirection(button.id);
 };
 
 const isCorrectDirection = function (currentDirection) {
@@ -227,3 +229,11 @@ const isCorrectDirection = function (currentDirection) {
 window.addEventListener('keydown', listenEvent);
 
 joystick.addEventListener('click', listetJoystick);
+
+joystick.addEventListener('touchstart', event => {
+  const button = event.target;
+  button.style.stroke = 'Green';
+  setTimeout(() => {
+    button.style.stroke = 'Grey';
+  }, 500);
+});

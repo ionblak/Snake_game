@@ -32,6 +32,10 @@
 .joystick {
   display: none;
 }
+.svg {
+  stroke: grey;
+  stroke-width: 8px;
+}
 
 @media only screen and (min-width: 320px) and (max-width: 480px) {
   .joystick {
