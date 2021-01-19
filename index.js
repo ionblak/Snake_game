@@ -6,7 +6,7 @@ const joystick = document.querySelector('#joystick');
 const mediaOptions = window.matchMedia('all and (max-width: 320px)');
 
 if (mediaOptions.matches) {
-  canvas.width = 300;
+  canvas.width = 200;
   canvas.height = 200;
 }
 
