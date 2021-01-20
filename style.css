@@ -1,9 +1,13 @@
+body {
+  overflow: hidden;
+}
 .header {
   text-align: center;
 }
 
 .titel {
   margin-bottom: 5px;
+  opacity: 0.5;
 }
 
 .button {
@@ -29,18 +33,16 @@
   justify-content: center;
   margin-bottom: 10px;
 }
-.joystick {
+.footer {
   display: none;
 }
-.svg {
-  stroke: grey;
-  stroke-width: 8px;
+.description {
+  text-align: center;
+  color: grey;
 }
-
 @media only screen and (min-width: 320px) and (max-width: 480px) {
-  .joystick {
+  .footer {
     display: block;
     margin: 0 auto;
-    opacity: 0.3;
   }
 }

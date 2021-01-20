@@ -179,14 +179,7 @@ const apple = new Apple();
 drawScore();
 drawBorder();
 
-buttonStart.addEventListener('click', startGame);
-
-buttonNewGame.addEventListener('click', event => {
-  event.preventDefault();
-  location.reload();
-});
-
-function startGame() {
+const startGame = function () {
   buttonStart.disabled = true;
 
   intervalId = setInterval(() => {
@@ -197,19 +190,12 @@ function startGame() {
     apple.draw();
     drawBorder();
   }, 200);
-}
+};
 
 // Реализация управления с клавиатуры
 const listenEvent = function (event) {
   event.preventDefault();
   isCorrectDirection(event.key);
-};
-
-// реализация джостика для телефона
-const listetJoystick = function (event) {
-  const button = event.target;
-
-  isCorrectDirection(button.id);
 };
 
 const isCorrectDirection = function (currentDirection) {
@@ -226,14 +212,46 @@ const isCorrectDirection = function (currentDirection) {
   }
 };
 
-window.addEventListener('keydown', listenEvent);
+// реалилазия управления змейкай через свайп
+let xDirection = null;
+let yDirection = null;
 
-joystick.addEventListener('click', listetJoystick);
+const handleTouchStart = function (event) {
+  console.log('cddc');
+  xDirection = event.touches[0].clientX;
+  yDirection = event.touches[0].clientY;
+};
 
-joystick.addEventListener('touchstart', event => {
-  const button = event.target;
-  button.style.stroke = 'Green';
-  setTimeout(() => {
-    button.style.stroke = 'Grey';
-  }, 500);
+const handleTouchMove = function (event) {
+  if (!xDirection || !yDirection) {
+    return;
+  }
+
+  const xUp = event.touches[0].clientX;
+  const yUp = event.touches[0].clientY;
+  const xDiff = xDirection - xUp;
+  const yDiff = yDirection - yUp;
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    if (xDiff > 0) {
+      isCorrectDirection('ArrowLeft');
+    } else {
+      isCorrectDirection('ArrowRight');
+    }
+  } else {
+    if (yDiff > 0) {
+      isCorrectDirection('ArrowUp');
+    } else {
+      isCorrectDirection('ArrowDown');
+    }
+  }
+};
+
+buttonNewGame.addEventListener('click', event => {
+  event.preventDefault();
+  location.reload();
 });
+buttonStart.addEventListener('click', startGame);
+window.addEventListener('keydown', listenEvent);
+document.addEventListener('touchmove', _.debounce(handleTouchMove, 100));
+document.addEventListener('touchstart', handleTouchStart);
